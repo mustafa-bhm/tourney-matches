@@ -6,16 +6,22 @@ import { preparePlayerData, addWinsToPlayers } from "../helpers/playerHelpers";
 function PlayerList(props) {
   const playerDataArray = preparePlayerData(playerData);
   const parsedPlayerData = addWinsToPlayers(playerDataArray, matchData);
-  const onePlayer = parsedPlayerData[0];
+  // const onePlayer = parsedPlayerData[0];
+  const players = parsedPlayerData.map((player) => {
+    return (
+      <Player
+        key={player.gamerTag}
+        firstName={player.firstName}
+        gamerTag={player.gamerTag}
+        lastName={player.lastName}
+        wins={player.wins}
+      />
+    );
+  });
   return (
     <section className="PlayerList">
       <h1> Current Participating players</h1>
-      <Player
-        firstName={onePlayer.firstName}
-        gamerTag={onePlayer.gamerTag}
-        lastName={onePlayer.lastName}
-        wins={onePlayer.wins}
-      />
+      {players}
     </section>
   );
 }
